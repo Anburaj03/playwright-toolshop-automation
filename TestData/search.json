@@ -1,0 +1,4 @@
+[
+  { "term": "Hammer", "visible": "Thor Hammer", "hidden": "Combination Pliers" },
+  { "term": "Pliers", "visible": "Combination Pliers", "hidden": "Thor Hammer" }
+]
