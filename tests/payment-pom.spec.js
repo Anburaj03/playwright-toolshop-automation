@@ -15,9 +15,8 @@ async function goToPayment(page) {
   await home.openFirstProduct();
   await page.waitForTimeout(1500);
   await product.addToCart();
-  await expect(product.cartBadge).toHaveText('1');
-  await page.waitForTimeout(1500);
   await cart.open();
+  await expect(cart.quantityBox).toHaveValue('1');
   await page.waitForTimeout(1500);
   await cart.proceed();
   await page.waitForTimeout(1500);
