@@ -6,3 +6,4 @@ node_modules/
 /playwright/.auth/
 /*.png
 explore-output.txt
+cucumber-report.html
