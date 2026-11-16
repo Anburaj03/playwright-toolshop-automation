@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { HomePage } from './Homepage.js';
 import { ProductPage } from './Productspage.js';
 import { CartPage } from './Cartpage.js';
-import { CheckoutPage } from './Checkoutpage.js';
+import { CheckoutPage } from './checkoutpage.js';
 
 async function goToPayment(page) {
   const home = new HomePage(page);
