@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test('billing form', async ({ page }) => {
   // Home page open, product select, cart-ku add
   await page.goto('https://practicesoftwaretesting.com');
-  await page.locator('[data-test="product-name"]').first().click();
+  await page.locator('[data-test="product-name"]').filter({ hasNotText: 'Pliers' }).first().click();
   await page.locator('[data-test="add-to-cart"]').click();
   await expect(page.locator('[data-test="cart-quantity"]')).toHaveText('1');
 
@@ -34,7 +34,7 @@ test('billing form', async ({ page }) => {
 
 test('billing flow', async ({ page }) => {
   await page.goto('https://practicesoftwaretesting.com');
-  await page.locator('[data-test="product-name"]').first().click();
+  await page.locator('[data-test="product-name"]').filter({ hasNotText: 'Pliers' }).first().click();
   await page.locator('[data-test="add-to-cart"]').click();
   await expect(page.locator('[data-test="cart-quantity"]')).toHaveText('1');
   await page.locator('[data-test="nav-cart"]').click();

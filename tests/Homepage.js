@@ -16,6 +16,6 @@ export class HomePage {
   }
 
   async openFirstProduct() {
-    await this.productNames.first().click();
+    await this.productNames.filter({ hasNotText: 'Pliers' }).first().click();
   }
 }

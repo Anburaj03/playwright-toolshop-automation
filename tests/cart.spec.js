@@ -1,9 +1,17 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Cart', () => {
+  let name;
+  let price;
+
   test.beforeEach(async ({ page }) => {
     await page.goto('https://practicesoftwaretesting.com');
-    await page.locator('[data-test="product-name"]').first().click();
+    await page.locator('[data-test="product-name"]').filter({ hasNotText: 'Pliers' }).first().click();
+
+    // Product page-la peyar, price edukkurom
+    name = (await page.locator('[data-test="product-name"]').innerText()).trim();
+    price = (await page.locator('[data-test="unit-price"]').innerText()).replace('$', '').trim();
+
     await page.locator('[data-test="add-to-cart"]').click();
     await expect(page.locator('[data-test="cart-quantity"]')).toHaveText('1');
     await page.locator('[data-test="nav-cart"]').click();
@@ -16,17 +24,18 @@ test.describe('Cart', () => {
   });
 
   test('cart item', async ({ page }) => {
-    await expect(page.locator('[data-test="product-title"]')).toContainText('Combination Pliers');
-    await expect(page.locator('[data-test="product-price"]')).toContainText('14.15');
-    await expect(page.locator('[data-test="line-price"]')).toContainText('14.15');
-    await expect(page.locator('[data-test="cart-total"]')).toContainText('14.15');
+    await expect(page.locator('[data-test="product-title"]')).toContainText(name);
+    await expect(page.locator('[data-test="product-price"]')).toContainText(price);
+    await expect(page.locator('[data-test="line-price"]')).toContainText(price);
+    await expect(page.locator('[data-test="cart-total"]')).toContainText(price);
   });
 
   test('cart quantity', async ({ page }) => {
+    const total = (Number(price) * 3).toFixed(2);
     await page.locator('[data-test="product-quantity"]').fill('3');
     await page.locator('[data-test="product-quantity"]').press('Tab');
-    await expect(page.locator('[data-test="line-price"]')).toContainText('42.45');
-    await expect(page.locator('[data-test="cart-total"]')).toContainText('42.45');
+    await expect(page.locator('[data-test="line-price"]')).toContainText(total);
+    await expect(page.locator('[data-test="cart-total"]')).toContainText(total);
   });
 
   test('continue shopping', async ({ page }) => {

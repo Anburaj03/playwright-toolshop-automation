@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test('sign in form', async ({ page }) => {
   // Home page open, product select, cart-ku add
   await page.goto('https://practicesoftwaretesting.com');
-  await page.locator('[data-test="product-name"]').first().click();
+  await page.locator('[data-test="product-name"]').filter({ hasNotText: 'Pliers' }).first().click();
   await page.locator('[data-test="add-to-cart"]').click();
   await expect(page.locator('[data-test="cart-quantity"]')).toHaveText('1');
 
@@ -20,7 +20,7 @@ test('sign in form', async ({ page }) => {
 
 test('wrong login', async ({ page }) => {
   await page.goto('https://practicesoftwaretesting.com');
-  await page.locator('[data-test="product-name"]').first().click();
+  await page.locator('[data-test="product-name"]').filter({ hasNotText: 'Pliers' }).first().click();
   await page.locator('[data-test="add-to-cart"]').click();
   await expect(page.locator('[data-test="cart-quantity"]')).toHaveText('1');
   await page.locator('[data-test="nav-cart"]').click();
@@ -35,7 +35,7 @@ test('wrong login', async ({ page }) => {
 
 test('guest tab', async ({ page }) => {
   await page.goto('https://practicesoftwaretesting.com');
-  await page.locator('[data-test="product-name"]').first().click();
+  await page.locator('[data-test="product-name"]').filter({ hasNotText: 'Pliers' }).first().click();
   await page.locator('[data-test="add-to-cart"]').click();
   await expect(page.locator('[data-test="cart-quantity"]')).toHaveText('1');
   await page.locator('[data-test="nav-cart"]').click();
@@ -51,7 +51,7 @@ test('guest tab', async ({ page }) => {
 
 test('guest flow', async ({ page }) => {
   await page.goto('https://practicesoftwaretesting.com');
-  await page.locator('[data-test="product-name"]').first().click();
+  await page.locator('[data-test="product-name"]').filter({ hasNotText: 'Pliers' }).first().click();
   await page.locator('[data-test="add-to-cart"]').click();
   await expect(page.locator('[data-test="cart-quantity"]')).toHaveText('1');
   await page.locator('[data-test="nav-cart"]').click();
