@@ -50,9 +50,7 @@ test.describe('Hand Tools products', () => {
   test('brand filter', async ({ page }) => {
     await page.getByLabel('ForgeFlex Tools').check();
     await expect(page.getByLabel('ForgeFlex Tools')).toBeChecked();
-    await page.waitForTimeout(2000);
-    const count = await page.locator('[data-test="product-name"]').count();
-    console.log('ForgeFlex products on page:', count);
+    await expect(page.locator('[data-test="product-name"]').first()).toBeVisible();
   });
 
   test('eco filter', async ({ page }) => {

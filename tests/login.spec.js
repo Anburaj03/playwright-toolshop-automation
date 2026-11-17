@@ -30,13 +30,8 @@ test('empty login errors', async ({ page }) => {
 test('valid login opens account page', async ({ page }) => {
   await page.goto('https://practicesoftwaretesting.com/auth/login');
   await page.getByPlaceholder('Your email').fill('customer@practicesoftwaretesting.com');
-  await page.waitForTimeout(1500);
   await page.getByPlaceholder('Your password').fill('welcome01');
-  await page.waitForTimeout(1500);
-  await page.getByRole('button', { name: 'Login' }).highlight();
-  await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Login' }).click();
-  await page.waitForTimeout(4000);
   await expect(page).toHaveURL('https://practicesoftwaretesting.com/account');
 });
 
@@ -59,13 +54,7 @@ test('only password filled shows email required', async ({ page }) => {
 test('wrong credentials stays on login page', async ({ page }) => {
   await page.goto('https://practicesoftwaretesting.com/auth/login');
   await page.getByPlaceholder('Your email').fill('wrong@example.com');
-  await page.waitForTimeout(1500);
   await page.getByPlaceholder('Your password').fill('WrongPass123');
-  await page.waitForTimeout(1500);
-  await page.getByRole('button', { name: 'Login' }).highlight();
-  await page.waitForTimeout(2000);
   await page.getByRole('button', { name: 'Login' }).click();
-  await page.waitForTimeout(5000);
-  await page.screenshot({ path: 'login-wrong-credentials.png', fullPage: true });
   await expect(page).toHaveURL('https://practicesoftwaretesting.com/auth/login');
 });

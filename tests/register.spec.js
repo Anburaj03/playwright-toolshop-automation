@@ -41,10 +41,8 @@ test('register a new customer account', async ({ page }) => {
   await page.getByPlaceholder('Your password').fill('Zx9!kLm#2026qW');
 
   await page.getByRole('button', { name: 'Register' }).click();
-  await page.waitForTimeout(4000);
 
-  await page.screenshot({ path: 'register-result.png', fullPage: true });
-  console.log('Registered with:', email, 'URL:', page.url());
+  await expect(page).toHaveURL('https://practicesoftwaretesting.com/auth/login');
   await expect(page.getByText('has appeared in a data leak')).not.toBeVisible();
 });
 

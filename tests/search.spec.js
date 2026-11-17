@@ -22,7 +22,7 @@ test.describe('Search', () => {
     await page.locator('[data-test="search-query"]').fill('zzzzxxxx');
     await page.locator('[data-test="search-submit"]').click();
     await expect(page.locator('[data-test="product-name"]')).toHaveCount(0);
-    console.log(await page.locator('body').innerText());
+    await expect(page.getByText('There are no products found.')).toBeVisible();
   });
 
   test('empty search', async ({ page }) => {
@@ -42,9 +42,7 @@ test.describe('Search', () => {
   test('special chars', async ({ page }) => {
     await page.locator('[data-test="search-query"]').fill('@#$%');
     await page.locator('[data-test="search-submit"]').click();
-    await page.waitForTimeout(2000);
-    const count = await page.locator('[data-test="product-name"]').count();
-    console.log('Special chars products:', count);
+    await expect(page.locator('[data-test="product-name"]')).toHaveCount(0);
     await expect(page.locator('[data-test="search-query"]')).toBeVisible();
   });
 });
