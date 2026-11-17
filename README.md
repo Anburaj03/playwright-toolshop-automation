@@ -1,40 +1,70 @@
-# Playwright Toolshop Automation
+# Toolshop Test Automation
 
-End-to-end test automation project for the practice e-commerce site https://practicesoftwaretesting.com, built with Playwright and JavaScript.
+Automation testing project for [Practice Software Testing - Toolshop](https://practicesoftwaretesting.com), built with **Playwright (JavaScript)**.
 
-## Tech used
-- Playwright Test (`@playwright/test`), JavaScript, Node.js
+## Tech Stack
+- JavaScript
+- Playwright Test
+- Cucumber (BDD)
 - Page Object Model (POM)
-- Data-driven testing (JSON test data)
-- HTML report, screenshots, VS Code, Git, GitHub
-- Manual test cases and bug report in Excel
+- Data-Driven Testing (JSON)
+- Git, GitHub, GitHub Actions
+- HTML reports
 
-## Modules covered
-Home, Contact, Login, Register, Categories, Products (sort, filter, pagination), Search, Product details, Cart, Checkout (guest and billing), Payment.
+## What is covered
+- Home, Categories, Products, Product details
+- Search (positive, negative, special characters)
+- Register and Login
+- Contact form
+- Cart, Checkout (guest flow), Billing address
+- Payment methods
+- Manual test cases and bug report (Excel)
 
-## Project structure
+## Project Structure
 ```
-tests/        Test files (*.spec.js) and page objects
-TestData/     search.json (test data), Toolshop_Manual_Testing.xlsx (manual test cases, bug report)
+tests/            Playwright test files and page objects
+features/         Cucumber feature files and step definitions
+TestData/         JSON test data and manual testing Excel
+.github/workflows GitHub Actions workflow
 playwright.config.js
+cucumber.cjs
 ```
 
 ## How to run
+
+Install:
 ```
 npm install
-npx playwright install
+```
+
+Run all Playwright tests:
+```
 npx playwright test
-npx playwright show-report
 ```
 
 Run one file:
 ```
-npx playwright test cart-pom.spec.js
+npx playwright test cart.spec.js --reporter=list
 ```
 
-## Manual testing
-`TestData/Toolshop_Manual_Testing.xlsx` has a summary, test cases for each module and a bug report.
+Run with browser visible:
+```
+npx playwright test cart.spec.js --headed
+```
 
-## In progress
-- Cucumber (BDD) example
-- GitHub Actions run
+Run Cucumber (BDD) tests:
+```
+npx cucumber-js
+```
+
+Open the HTML report:
+```
+npx playwright show-report
+```
+
+## Continuous Integration
+GitHub Actions runs all Playwright tests on every push to `main`.
+
+## Notes
+- Tests run against a live public demo site, so test data (like product stock) can change.
+- Tests skip out-of-stock products so that Add to Cart always works.
